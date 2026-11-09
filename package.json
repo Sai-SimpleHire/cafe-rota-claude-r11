@@ -1,0 +1,13 @@
+{
+  "name": "cafe-rota",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shift rota for a small café: plan and publish the week, staff see their own shifts, swaps approved by the manager.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=22.5"
+  }
+}

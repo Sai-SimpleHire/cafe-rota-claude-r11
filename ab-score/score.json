@@ -1,0 +1,281 @@
+{
+  "app": "cafe-rota",
+  "scoredAt": "2026-11-09T10:26:04.514Z",
+  "model": "claude-opus-5-5",
+  "static": {
+    "linesWritten": 1217,
+    "partLines": 0,
+    "secrets": [],
+    "testFixtureSecrets": [],
+    "envFiles": [],
+    "fileSizes": {
+      "files": 3,
+      "over500": [
+        {
+          "file": "server.js",
+          "lines": 568
+        },
+        {
+          "file": "public\\app.js",
+          "lines": 528
+        }
+      ],
+      "largest": {
+        "file": "server.js",
+        "lines": 568
+      }
+    },
+    "envRead": [
+      "DB_FILE",
+      "PORT"
+    ],
+    "hardcodedLocalhost": []
+  },
+  "operator": {
+    "recipe": {
+      "install": null,
+      "prepareDatabase": null,
+      "typecheck": null,
+      "build": null,
+      "test": null,
+      "start": "node server.js",
+      "env": {
+        "PORT": "54358",
+        "DB_FILE": "C:\\Users\\ADMIN\\shipyard-ab\\runs\\cafe-rota-plain-r11\\score\\app-data\\rota.db"
+      },
+      "notes": "The app has no npm dependencies and doesn't use PostgreSQL. It stores its data in SQLite using Node's built-in module, so it needs Node 22.5 or newer (tested on 24.18). DB_FILE points it at the app-data folder, and it creates the tables itself the first time it starts. I started it once and the home page loaded (HTTP 200). Then I stopped it and deleted the test database, so the app-data folder is empty again. To make the first account, open http://localhost:54358: on first use it asks you to create the manager account. The manager then adds staff accounts on the Staff page and sets each one's starting password. Sign-in cookies don't need HTTPS, so plain http on localhost works. A week stays hidden from staff until the manager publishes it."
+    },
+    "changedFiles": []
+  },
+  "deploy": {
+    "productionStart": true,
+    "envDocumented": false,
+    "undocumentedEnv": [
+      "DB_FILE"
+    ],
+    "noHardcodedLocalhost": true,
+    "hardcodedLocalhost": [],
+    "migrations": null
+  },
+  "install": null,
+  "prepareDatabase": null,
+  "build": null,
+  "typecheck": null,
+  "testDatabase": null,
+  "tests": null,
+  "audit": {
+    "status": "NO PACKAGES",
+    "detail": "package.json lists no packages, so there is nothing to audit"
+  },
+  "starts": true,
+  "judge": {
+    "checks": [
+      {
+        "id": "A1",
+        "status": "PASS",
+        "note": "On first visit the app showed a 'Set up your café rota' form, which created the manager account and went straight to the Staff page."
+      },
+      {
+        "id": "A2",
+        "status": "PASS",
+        "note": "Ana and Ben were added with starting passwords, and both appear on the Staff list."
+      },
+      {
+        "id": "A3",
+        "status": "PASS",
+        "note": "The three shifts were added to the week of 16 Nov and the week shows as Published."
+      },
+      {
+        "id": "A4",
+        "status": "PASS",
+        "note": "Ben's draft shift on Thu 26 Nov did not show on his My shifts page, and asking the app for that week directly as Ben returned 403."
+      },
+      {
+        "id": "A5",
+        "status": "PASS",
+        "note": "Ana's first sign-in asked her to replace the starting password, and the new password worked on the next sign-in."
+      },
+      {
+        "id": "A6",
+        "status": "PASS",
+        "note": "Ana saw Mon 16 then Wed 18, soonest first, and not Ben's Tuesday shift."
+      },
+      {
+        "id": "A7",
+        "status": "PASS",
+        "note": "The swap request was sent, and the manager's rota still showed Ana on Wednesday, marked 'swap asked'."
+      },
+      {
+        "id": "A8",
+        "status": "PASS",
+        "note": "After approval Ben's page lists Wed 18 Nov, and Ana's page shows only Monday plus the approved request."
+      },
+      {
+        "id": "A9",
+        "status": "PASS",
+        "note": "Ben was removed after a confirm step, and signing in as him then returned 'That email and password do not match.'"
+      },
+      {
+        "id": "S1",
+        "status": "PASS",
+        "note": "As Ana, typing #/plan, #/staff and #/swaps sent her back to My shifts, and the manager requests returned 403."
+      },
+      {
+        "id": "S2",
+        "status": "PASS",
+        "note": "Changing ids to other people's shifts and requests returned 400 or 404 with no data, and a userId added to /api/my-shifts was ignored."
+      },
+      {
+        "id": "S3",
+        "status": "PASS",
+        "note": "After signing out, the back button and every typed page address showed the sign-in page, though a stray 'Sign out' link stays in the header there."
+      },
+      {
+        "id": "C1",
+        "status": "PASS",
+        "note": "A 14:00–10:00 shift was refused with 'The finish time must be after the start time.'"
+      },
+      {
+        "id": "C2",
+        "status": "PASS",
+        "note": "A wrong password gave the same 'That email and password do not match.' for a real email and for an unknown one."
+      },
+      {
+        "id": "C3",
+        "status": "PASS",
+        "note": "No framework error page, stack trace or blank screen appeared in any step."
+      },
+      {
+        "id": "M1",
+        "status": "PASS",
+        "note": "At 390px, scrollWidth was 390 on the sign-in, staff, swaps, password, plan and my-shifts pages, and nothing was cut off at the edge."
+      },
+      {
+        "id": "M2",
+        "status": "PASS",
+        "note": "At phone size I signed in as the manager (the setup form cannot run a second time), added Ana-phone and Ben-phone, added the three shifts and pressed Publish, all visible and tappable."
+      },
+      {
+        "id": "D1",
+        "status": "PASS",
+        "note": "After the manager turned the request down, Cara still had Thursday, Dev did not, and the manager's rota still showed Cara."
+      },
+      {
+        "id": "D2",
+        "status": "PASS",
+        "note": "The colleague list offered neither Cara nor Ben, and sending either id directly was refused with 'Please choose a colleague to take the shift.'"
+      },
+      {
+        "id": "D3",
+        "status": "PASS",
+        "note": "A double click sent one approve, sending it again returned 400 'That request is no longer waiting.', and there was only one Thursday shift for Dev."
+      },
+      {
+        "id": "D4",
+        "status": "PASS",
+        "note": "After the manager removed Dev, his next action and his reload in the second window showed the sign-in page."
+      },
+      {
+        "id": "D5",
+        "status": "PASS",
+        "note": "Typing Eve's shifts address before she changed her password kept her on the choose-a-password screen, and the shifts request returned 403."
+      },
+      {
+        "id": "D6",
+        "status": "PASS",
+        "note": "After Eve set a new password, her starting password was refused."
+      },
+      {
+        "id": "D7",
+        "status": "PASS",
+        "note": "The full name shows exactly as typed on the staff list and the rota, and at 390px it wraps onto more lines rather than being cut off."
+      },
+      {
+        "id": "D8",
+        "status": "PASS",
+        "note": "The name shows as literal text with its angle brackets on the staff list and the rota, with no bold, no image and no dialog."
+      },
+      {
+        "id": "D9",
+        "status": "PASS",
+        "note": "Empty name, empty email and the duplicate cara@example.com were each refused with a plain message, and no one was added."
+      },
+      {
+        "id": "D10",
+        "status": "PASS",
+        "note": "The overlapping shift was refused with 'Eve already has a shift 08:00–14:00 that day.'"
+      },
+      {
+        "id": "D11",
+        "status": "PASS",
+        "note": "Two quick presses (and a dblclick) sent one request and added one shift."
+      },
+      {
+        "id": "D12",
+        "status": "PASS",
+        "note": "After reloading and signing in again as the manager and as Cara, all staff, shifts and swap decisions were unchanged."
+      },
+      {
+        "id": "D13",
+        "status": "PASS",
+        "note": "After signing out, the staff, weeks, swaps, my-shifts and summary requests all returned 401 with no data."
+      },
+      {
+        "id": "D14",
+        "status": "PASS",
+        "note": "As Cara, the manager's add-shift, remove-staff and approve requests each returned 403, and the manager's pages were unchanged."
+      },
+      {
+        "id": "D15",
+        "status": "PASS",
+        "note": "Tries 9 and 10 got 429 'Too many attempts. Please wait a few minutes', and her right password worked about 20 minutes later, longer than 'a few minutes' suggests."
+      },
+      {
+        "id": "D16",
+        "status": "PASS",
+        "note": "document.cookie was empty, and the sid cookie is HttpOnly but not Secure, which the check allows because the app is only on localhost."
+      },
+      {
+        "id": "D17",
+        "status": "PASS",
+        "note": "Using only the keyboard I signed in as Cara and reached her shifts, and every focused control showed a visible outline."
+      },
+      {
+        "id": "D18",
+        "status": "PASS",
+        "note": "Every field on the sign-in, add staff and add shift forms was found by its label with getByLabel."
+      }
+    ]
+  },
+  "stuck": null,
+  "total": {
+    "works": 35,
+    "separation": 25,
+    "care": 10,
+    "builds": 10,
+    "security": 10,
+    "tests": 0,
+    "outOf100": 90
+  },
+  "founder": {
+    "deployReady": 20,
+    "fileSize": 5,
+    "phone": 25,
+    "stuck": null,
+    "payments": null,
+    "outOf100": 71.4
+  },
+  "depth": {
+    "brief": 100,
+    "inputs": 100,
+    "attacks": 100,
+    "access": 100,
+    "passed": 18,
+    "of": 18,
+    "outOf100": 100
+  },
+  "integrity": {
+    "sourceFiles": 7,
+    "changedByScoring": []
+  }
+}
